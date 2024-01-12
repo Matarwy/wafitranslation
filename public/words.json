@@ -1,0 +1,22 @@
+{
+    "categories": [
+      {
+        "name": {"arabic": "الضمائر", "english": "Pronouns"},
+        "words": [
+          {"arabic": "أنا", "english": "I"},
+          {"arabic": "أنت", "english": "you"},
+          {"arabic": "هو", "english": "he"},
+          {"arabic": "هي", "english": "she"},
+          {"arabic": "هو/هي للأشياء", "english": "it"},
+          {"arabic": "نحن", "english": "we"},
+          {"arabic": "هم/هن", "english": "they"}
+        ]
+      },
+      {
+        "name": {"arabic": "الألوان", "english": "Colors"},
+        "words": [
+        ]
+      }
+    ]
+  }
+  

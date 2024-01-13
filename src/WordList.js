@@ -31,7 +31,8 @@ function WordItem({ word }) {
 
     utterance.lang = 'en-US'; 
     utterance.voice = synth.getVoices()[0];
-    utterance.rate = 0.7
+    utterance.rate = 0.8
+    utterance.volume = 2
 
     window.speechSynthesis.speak(utterance);
   };
@@ -53,7 +54,8 @@ function WordList({ category, words }) {
 
     utterance.lang = 'en-US'; 
     utterance.voice = synth.getVoices()[0];
-    utterance.rate = 0.7
+    utterance.rate = 0.8
+    utterance.volume = 2
 
     window.speechSynthesis.speak(utterance);
   };

@@ -26,15 +26,14 @@ const styles = {
 
 function WordItem({ word }) {
   const playPronunciation = () => {
-    const utterance_en = new SpeechSynthesisUtterance(word.english);
-    // const utterance_ar = new SpeechSynthesisUtterance(word.arabic);
+    const utterance = new SpeechSynthesisUtterance(word.english);
+    var synth = speechSynthesis;
 
-    // utterance_ar.lang = 'ar-SA'; // Replace 'ar-SA' with the appropriate Arabic language code
-    utterance_en.lang = 'en-US'; // Replace 'en-US' with the appropriate English language code
+    utterance.lang = 'en-US'; 
+    utterance.voice = synth.getVoices()[0];
+    utterance.rate = 0.7
 
-    // Implement text-to-speech functionality
-    window.speechSynthesis.speak(utterance_en);
-    // window.speechSynthesis.speak(utterance_ar);
+    window.speechSynthesis.speak(utterance);
   };
 
   return (
@@ -49,15 +48,14 @@ function WordItem({ word }) {
 
 function WordList({ category, words }) {
   const playCategoryPronunciation = () => {
-    const utterance_en = new SpeechSynthesisUtterance(category.english);
-    // const utterance_ar = new SpeechSynthesisUtterance(word.arabic);
+    const utterance = new SpeechSynthesisUtterance(category.english);
+    var synth = speechSynthesis;
 
-    // utterance_ar.lang = 'ar-SA'; // Replace 'ar-SA' with the appropriate Arabic language code
-    utterance_en.lang = 'en-US'; // Replace 'en-US' with the appropriate English language code
+    utterance.lang = 'en-US'; 
+    utterance.voice = synth.getVoices()[0];
+    utterance.rate = 0.7
 
-    // Implement text-to-speech functionality
-    window.speechSynthesis.speak(utterance_en);
-    // window.speechSynthesis.speak(utterance_ar);
+    window.speechSynthesis.speak(utterance);
   };
 
   return (

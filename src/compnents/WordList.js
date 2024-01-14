@@ -53,11 +53,18 @@ function WordList({ category, words }) {
     var synth = speechSynthesis;
 
     utterance.lang = 'en-US'; 
-    utterance.voice = synth.getVoices()[0];
-    utterance.rate = 0.9
-    utterance.volume = 2
+    const voices = synth.getVoices()[0];
+    for (let i = 0; i < voices.length; i++){
+      utterance.voice = voices[i];
+      utterance.rate = 0.9
+      utterance.volume = 2
 
-    window.speechSynthesis.speak(utterance);
+      window.speechSynthesis.speak(utterance);
+    }
+    // utterance.rate = 0.9
+    // utterance.volume = 2
+
+    // window.speechSynthesis.speak(utterance);
   };
 
   return (

@@ -24,37 +24,35 @@ const styles = {
     },
 };
 
-function WordItem({ word }) {
+function WordItem({ word, selectedVoice }) {
   const playPronunciation = () => {
     const utterance = new SpeechSynthesisUtterance(word.english);
     console.log(speechSynthesis.getVoices())
     utterance.lang = 'en-US'; 
-    utterance.voice = speechSynthesis.getVoices()[2];
+    utterance.voice = selectedVoice;
     utterance.rate = 0.8;
-    utterance.pitch = 1;
-    utterance.volume = 1;
+    utterance.pitch = 0.5;
+    utterance.volume = 1.5;
     window.speechSynthesis.speak(utterance);
   };
 
   return (
     <div onClick={playPronunciation} style={styles.wordItem}>
-
-        <span>{word.english}</span>
-        <span style={{ marginLeft: '10px' }}>({word.arabic})</span>
-      
+      <span>{word.english}</span>
+      <span style={{ marginLeft: '10px' }}>({word.arabic})</span>
     </div>
   );
 }
 
-function WordList({ category, words }) {
+function WordList({ category, words, selectedVoice }) {
   const playCategoryPronunciation = () => {
     const utterance = new SpeechSynthesisUtterance(category.english);
 
     utterance.lang = 'en-US'; 
     utterance.rate = 0.8;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-    utterance.voice = speechSynthesis.getVoices()[2];
+    utterance.pitch = 0.5;
+    utterance.volume = 1.5;
+    utterance.voice = selectedVoice;
     window.speechSynthesis.speak(utterance);
 
   };
@@ -68,7 +66,7 @@ function WordList({ category, words }) {
       <div>
         {words ? (
           words.map((word, index) => (
-            <WordItem key={index} word={word} />
+            <WordItem key={index} word={word} selectedVoice={selectedVoice} />
           ))
         ) : (
           <p>No words available</p>

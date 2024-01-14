@@ -67,9 +67,13 @@ function WordList({ category, words }) {
         <span style={{ marginLeft: '10px' }}>({category.arabic})</span>
       </h2>
       <div>
-        {words.map((word, index) => (
-          <WordItem key={index} word={word} />
-        ))}
+        {words ? (
+          words.map((word, index) => (
+            <WordItem key={index} word={word} />
+          ))
+        ) : (
+          <p>No words available</p>
+        )}
       </div>
     </div>
   );

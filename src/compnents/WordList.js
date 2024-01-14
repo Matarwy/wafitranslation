@@ -31,7 +31,7 @@ function WordItem({ word, selectedVoice }) {
     utterance.lang = 'en-US'; 
     utterance.voice = selectedVoice;
     utterance.rate = 0.8;
-    utterance.pitch = 2;
+    utterance.pitch = 1.2;
     utterance.volume = 1;
     window.speechSynthesis.speak(utterance);
   };
@@ -50,7 +50,7 @@ function WordList({ category, words, selectedVoice }) {
 
     utterance.lang = 'en-US'; 
     utterance.rate = 0.8;
-    utterance.pitch = 2;
+    utterance.pitch = 1.2;
     utterance.volume = 1;
     utterance.voice = selectedVoice;
     window.speechSynthesis.speak(utterance);

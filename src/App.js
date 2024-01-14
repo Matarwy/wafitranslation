@@ -1,4 +1,4 @@
-import WordList from './WordList';
+import WordList from './compnents/WordList';
 import React, { useState, useEffect } from 'react';
 
 const styles = {
@@ -24,12 +24,29 @@ function App() {
   const [wordsData, setWordsData] = useState(null);
 
   useEffect(() => {
-    // Load JSON data
-    fetch('/words.json') // assuming the file is in the public folder
-      .then((response) => response.json())
-      .then((data) => setWordsData(data))
-      .catch((error) => console.error('Error loading JSON:', error));
+    // Check if data is in session storage
+    const storedData = sessionStorage.getItem('wordsData');
+
+    if (storedData) {
+      // If data is in session storage, use it
+      setWordsData(JSON.parse(storedData));
+    } else {
+      // If data is not in session storage, fetch and store it
+      fetch("./constants/words.json", {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setWordsData(data);
+          // Store the data in session storage
+          sessionStorage.setItem('wordsData', JSON.stringify(data));
+        })
+        .catch((error) => console.error('Error loading JSON:', error));
+    }
   }, []);
+
 
   if (!wordsData) {
     return <div>Loading...</div>;

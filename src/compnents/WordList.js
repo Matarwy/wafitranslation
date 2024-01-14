@@ -27,12 +27,12 @@ const styles = {
 function WordItem({ word }) {
   const playPronunciation = () => {
     const utterance = new SpeechSynthesisUtterance(word.english);
-    var synth = speechSynthesis;
-
+    console.log(speechSynthesis.getVoices())
     utterance.lang = 'en-US'; 
-    utterance.voice = synth.getVoices()[2];
-    utterance.rate = 0.75
-
+    utterance.voice = speechSynthesis.getVoices()[2];
+    utterance.rate = 0.8;
+    utterance.pitch = 1;
+    utterance.volume = 1;
     window.speechSynthesis.speak(utterance);
   };
 
@@ -51,7 +51,9 @@ function WordList({ category, words }) {
     const utterance = new SpeechSynthesisUtterance(category.english);
 
     utterance.lang = 'en-US'; 
-    utterance.rate = 0.75
+    utterance.rate = 0.8;
+    utterance.pitch = 1;
+    utterance.volume = 1;
     utterance.voice = speechSynthesis.getVoices()[2];
     window.speechSynthesis.speak(utterance);
 

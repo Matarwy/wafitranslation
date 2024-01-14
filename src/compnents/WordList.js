@@ -30,9 +30,8 @@ function WordItem({ word }) {
     var synth = speechSynthesis;
 
     utterance.lang = 'en-US'; 
-    utterance.voice = synth.getVoices()[0];
-    utterance.rate = 0.9
-    utterance.volume = 2
+    utterance.voice = synth.getVoices()[2];
+    utterance.rate = 0.75
 
     window.speechSynthesis.speak(utterance);
   };
@@ -50,21 +49,12 @@ function WordItem({ word }) {
 function WordList({ category, words }) {
   const playCategoryPronunciation = () => {
     const utterance = new SpeechSynthesisUtterance(category.english);
-    var synth = speechSynthesis;
 
     utterance.lang = 'en-US'; 
-    const voices = synth.getVoices()[0];
-    for (let i = 0; i < voices.length; i++){
-      utterance.voice = voices[i];
-      utterance.rate = 0.9
-      utterance.volume = 2
+    utterance.rate = 0.75
+    utterance.voice = speechSynthesis.getVoices()[2];
+    window.speechSynthesis.speak(utterance);
 
-      window.speechSynthesis.speak(utterance);
-    }
-    // utterance.rate = 0.9
-    // utterance.volume = 2
-
-    // window.speechSynthesis.speak(utterance);
   };
 
   return (

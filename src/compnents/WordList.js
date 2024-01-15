@@ -1,4 +1,5 @@
 import React from 'react';
+import AWS from 'aws-sdk';
 
 const styles = {
     wordList: {
@@ -26,14 +27,25 @@ const styles = {
 
 function WordItem({ word, selectedVoice }) {
   const playPronunciation = () => {
-    const utterance = new SpeechSynthesisUtterance(word.english);
-    console.log(speechSynthesis.getVoices())
-    utterance.lang = 'en-US'; 
-    utterance.voice = selectedVoice;
-    utterance.rate = 0.8;
-    utterance.pitch = 1.2;
-    utterance.volume = 1;
-    window.speechSynthesis.speak(utterance);
+    if (!selectedVoice) {
+      console.error('No voice selected.');
+      return;
+    }
+
+    const polly = new AWS.Polly();
+    const params = {
+      OutputFormat: 'mp3',
+      Text: word.english,
+      VoiceId: selectedVoice.Id,
+    };
+
+    polly.synthesizeSpeech(params, (err, data) => {
+      if (err) console.error(err);
+      else {
+        const audio = new Audio(`data:audio/mp3;base64,${data.AudioStream.toString('base64')}`);
+        audio.play();
+      }
+    });
   };
 
   return (
@@ -45,21 +57,31 @@ function WordItem({ word, selectedVoice }) {
 }
 
 function WordList({ category, words, selectedVoice }) {
-  const playCategoryPronunciation = () => {
-    const utterance = new SpeechSynthesisUtterance(category.english);
+  const playcategoryPronunciation = () => {
+    if (!selectedVoice) {
+      console.error('No voice selected.');
+      return;
+    }
 
-    utterance.lang = 'en-US'; 
-    utterance.rate = 0.8;
-    utterance.pitch = 1.2;
-    utterance.volume = 1;
-    utterance.voice = selectedVoice;
-    window.speechSynthesis.speak(utterance);
+    const polly = new AWS.Polly();
+    const params = {
+      OutputFormat: 'mp3',
+      Text: category.english,
+      VoiceId: selectedVoice.Id,
+    };
 
+    polly.synthesizeSpeech(params, (err, data) => {
+      if (err) console.error(err);
+      else {
+        const audio = new Audio(`data:audio/mp3;base64,${data.AudioStream.toString('base64')}`);
+        audio.play();
+      }
+    });
   };
 
   return (
     <div style={styles.wordList}>
-      <h2 style={styles.categoryTitle} onClick={playCategoryPronunciation}>
+      <h2 style={styles.categoryTitle} onClick={playcategoryPronunciation}>
         <span>{category.english}</span>
         <span style={{ marginLeft: '10px' }}>({category.arabic})</span>
       </h2>

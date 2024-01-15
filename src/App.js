@@ -1,6 +1,7 @@
 import WordList from './compnents/WordList';
 import allwords from './constants/words';
 import React, { useState, useEffect } from 'react';
+import AWS from 'aws-sdk';
 
 const styles = {
   app: {
@@ -24,26 +25,39 @@ const styles = {
 function App() {
   const [wordsData, setWordsData] = useState(null);
   const [selectedVoice, setSelectedVoice] = useState(null);
+  const [voices, setVoices] = useState([]);
 
   useEffect(() => {  
+      // Set up AWS Polly
+      AWS.config.update({
+        accessKeyId: 'AKIAWNIY3M454YWQ5TMK',
+        secretAccessKey: '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',
+        region: 'me-south-1',
+      });
+
+      // Optionally, list available Polly voices and choose one
+      const polly = new AWS.Polly();
+      polly.describeVoices({}, (err, data) => {
+        if (err) console.error(err);
+        else if (data && data.Voices && data.Voices.length > 0) {
+          const usEnglishVoices = data.Voices.filter((voice) => voice.LanguageCode === 'en-US');
+          setSelectedVoice(usEnglishVoices[0]);
+          setVoices(usEnglishVoices);
+        }
+      });
+
+      // Fetch your wordsData
       setWordsData(allwords);
-      // Fetch available voices when the component mounts
-      const voices = speechSynthesis.getVoices();
-      // Set the initial selected voice (you can choose a default or let the user decide)
-      setSelectedVoice(voices[0]);
   }, []);
   
 
+  // Function to handle voice change
   const handleVoiceChange = (event) => {
     const selectedVoiceName = event.target.value;
-    const voices = speechSynthesis.getVoices();
-    const newSelectedVoice = voices.find((voice) => voice.name === selectedVoiceName);
+    const newSelectedVoice = selectedVoiceName
+      ? voices.find((voice) => voice.Name === selectedVoiceName)
+      : null;
     setSelectedVoice(newSelectedVoice);
-  };
-
-  const wordListProps = {
-    selectedVoice,
-    onVoiceChange: handleVoiceChange,
   };
 
 
@@ -53,17 +67,15 @@ function App() {
 
   return (
     <div className="App" style={styles.app}>
-      <h1 style={styles.header}>Wafi Translation</h1>
-      <header style={styles.header}>
-        <label htmlFor="voices">Select a voice:</label>
-        <select id="voices" onChange={handleVoiceChange} value={selectedVoice ? selectedVoice.name : ''}>
-          {speechSynthesis.getVoices().map((voice) => (
-            <option key={voice.name} value={voice.name}>
-              {voice.name}
-            </option>
-          ))}
-        </select>
-      </header>
+      {/* Your other components here */}
+      <label htmlFor="voices">Select a voice:</label>
+      <select id="voices" onChange={handleVoiceChange} value={selectedVoice ? selectedVoice.Name : ''}>
+        {voices.map((voice) => (
+          <option key={voice.Id} value={voice.Name}>
+            {voice.Name}
+          </option>
+        ))}
+      </select>
       {wordsData.map((category, index) => (
         <WordList key={index} category={category.name} words={category.words} selectedVoice={selectedVoice} />
       ))}

@@ -103,7 +103,7 @@ function App() {
     <div className="App" style={styles.app}>
       {/* Hero Section */}
       <div style={styles.hero}>
-        <h1 style={styles.heroTitle}>English Basic Words by Wafi ALthagafi</h1>
+        <h1 style={styles.heroTitle}>English Basic Words <p style={styles.selectVoice}>by Wafi Althagafi</p></h1>
         <p style={styles.selectVoice}>Select a voice:</p>
         <select
           id="voices"

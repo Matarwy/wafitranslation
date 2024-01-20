@@ -19,7 +19,7 @@ const styles = {
   hero: {
     backgroundColor: '#0B60B0', // Replace with your desired background color
     color: '#F0EDCF',
-    padding: '80px 20px', // Adjust padding as needed
+    padding: '80px 5px', // Adjust padding as needed
     textAlign: 'center',
     position: 'relative',
     width: '100%',

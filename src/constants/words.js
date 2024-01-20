@@ -116,7 +116,7 @@ const allwords = [
     "words": [
         { "arabic": "الربيع", "english": "Spring" },
         { "arabic": "الصيف", "english": "Summer" },
-        { "arabic": "الخريف", "english": "Autumn/Fall" },
+        { "arabic": "الخريف", "english": "Autumn" },
         { "arabic": "الشتاء", "english": "Winter" }
     ]
     },

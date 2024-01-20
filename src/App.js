@@ -5,7 +5,7 @@ import AWS from 'aws-sdk';
 
 const styles = {
   app: {
-    fontFamily: 'Comic Sans MS, cursive',
+    fontFamily: 'Comic Sans MS, Arial, Helvetica, sans-serif',
     background: '#000000',
     backgroundImage: 'linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff 100%), linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff 100%)',
     minHeight: '100vh',

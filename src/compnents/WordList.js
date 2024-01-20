@@ -50,7 +50,7 @@ function WordItem({ word, selectedVoice, capitalize  }) {
     const polly = new AWS.Polly();
     const params = {
       OutputFormat: 'mp3',
-      Text: capitalize ? word.english.toUpperCase() : word.english.toLowerCase(),
+      Text: capitalize ? word.english.toUpperCase() : capitalizeI(word.english.toLowerCase()),
       VoiceId: selectedVoice.Id,
     };
 
@@ -63,9 +63,16 @@ function WordItem({ word, selectedVoice, capitalize  }) {
     });
   };
 
+  // Function to capitalize standalone "I" in a sentence
+  const capitalizeI = (text) => {
+    const words = text.split(' ');
+    const capitalizedWords = words.map((word) => (word.toLowerCase() === 'i' ? 'I' : word));
+    return capitalizedWords.join(' ');
+  };
+
   return (
     <div onClick={playPronunciation} style={styles.wordItem}>
-      <span>{capitalize ? word.english.toUpperCase() : word.english.toLowerCase()}</span>
+      <span>{capitalize ? word.english.toUpperCase() : capitalizeI(word.english.toLowerCase())}</span>
       <span style={{ marginLeft: '10px' }}>({word.arabic})</span>
     </div>
   );

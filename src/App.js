@@ -1,5 +1,7 @@
 import WordList from './compnents/WordList';
 import allwords from './constants/words';
+import en_characters from './constants/en_characters';
+import CharList from './compnents/CharList';
 import React, { useState, useEffect } from 'react';
 import AWS from 'aws-sdk';
 
@@ -52,6 +54,10 @@ const styles = {
     padding: '10px',
     backgroundColor: '#000000',
     color: '#F0EDCF',
+  },
+  charListContainer: {
+    marginTop: '20px',
+    textAlign: 'center',
   },
 };
 
@@ -117,6 +123,11 @@ function App() {
             </option>
           ))}
         </select>
+      </div>
+
+      {/* Character List */}
+      <div style={styles.charListContainer}>
+        <CharList category={{ english: 'Alphabets', arabic: 'الحروف الأبجدية' }} words={en_characters} selectedVoice={selectedVoice} />
       </div>
 
       {/* WordLists and other components */}
